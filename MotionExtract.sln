@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{87CBCDF8-E1D2-4FD9-B447-0FF380C651E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotionExtract", "src\MotionExtract\MotionExtract.csproj", "{73D1BA3B-DD14-4E0C-B06B-7C4D93B6F7CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{16B46504-EF0E-4693-B8C5-14FF5F4BA4B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotionExtract.Tests", "tests\MotionExtract.Tests\MotionExtract.Tests.csproj", "{D46A32EC-D2A4-4C72-8CB8-DD89AE109240}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73D1BA3B-DD14-4E0C-B06B-7C4D93B6F7CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D1BA3B-DD14-4E0C-B06B-7C4D93B6F7CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D1BA3B-DD14-4E0C-B06B-7C4D93B6F7CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D1BA3B-DD14-4E0C-B06B-7C4D93B6F7CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46A32EC-D2A4-4C72-8CB8-DD89AE109240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46A32EC-D2A4-4C72-8CB8-DD89AE109240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46A32EC-D2A4-4C72-8CB8-DD89AE109240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46A32EC-D2A4-4C72-8CB8-DD89AE109240}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{73D1BA3B-DD14-4E0C-B06B-7C4D93B6F7CD} = {87CBCDF8-E1D2-4FD9-B447-0FF380C651E7}
+		{D46A32EC-D2A4-4C72-8CB8-DD89AE109240} = {16B46504-EF0E-4693-B8C5-14FF5F4BA4B1}
+	EndGlobalSection
+EndGlobal
