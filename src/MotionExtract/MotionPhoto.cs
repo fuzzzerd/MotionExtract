@@ -16,14 +16,14 @@ public class MotionPhoto(FileInfo baseFile) : PhotoVideoBase(baseFile)
             mp4StartPos -= 4; // the real beginning of the mp4 starts 4 bytes before "ftyp"
 
             // Look for the JPG end (FF D9)
-            int jpgEndPos = IndexOfJpgEnd(data, mp4StartPos);
+            var jpgEndPos = IndexOfJpgEnd(data, mp4StartPos);
 
             if (jpgEndPos != -1)
             {
                 jpgEndPos += 2; // account for the length of the search string
 
-                JpgData.Add(data.Take(jpgEndPos).ToArray());
-                Mp4Data.Add(data.Skip(mp4StartPos).ToArray());
+                JpgData.Add([.. data.Take(jpgEndPos)]);
+                Mp4Data.Add([.. data.Skip(mp4StartPos)]);
             }
             else
             {

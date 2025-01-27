@@ -12,24 +12,24 @@ public abstract class PhotoVideoBase(FileInfo baseFile)
 
     public virtual void Save(string outputDir)
     {
-        string baseFileName = Path.GetFileNameWithoutExtension(BaseFile.FullName);
+        var baseFileName = Path.GetFileNameWithoutExtension(BaseFile.FullName);
 
-        for (int i = 0; i < JpgData.Count; i++)
+        for (var i = 0; i < JpgData.Count; i++)
         {
-            string jpgFileName = $"{baseFileName}_photo_{i + 1}.jpg";
+            var jpgFileName = $"{baseFileName}_photo_{i + 1}.jpg";
             File.WriteAllBytes(Path.Combine(outputDir, jpgFileName), JpgData[i]);
         }
 
-        for (int i = 0; i < Mp4Data.Count; i++)
+        for (var i = 0; i < Mp4Data.Count; i++)
         {
-            string mp4FileName = $"{baseFileName}__video_{i + 1}.mp4";
+            var mp4FileName = $"{baseFileName}__video_{i + 1}.mp4";
             File.WriteAllBytes(Path.Combine(outputDir, mp4FileName), Mp4Data[i]);
         }
     }
 
     public static bool TryGetPv(string filePath, out PhotoVideoBase file)
     {
-        string fullFilePath = Path.GetFullPath(filePath);
+        var fullFilePath = Path.GetFullPath(filePath);
 
         if (!File.Exists(fullFilePath))
         {
