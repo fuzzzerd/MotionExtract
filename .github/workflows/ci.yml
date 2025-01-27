@@ -8,9 +8,14 @@ on:
       - v*
   pull_request:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   build:
     name: CI Build
+
     strategy:
       matrix:
         kind: ['linux', 'windows', 'macOS']
@@ -24,7 +29,9 @@ jobs:
           - kind: macOS
             os: macos-latest
             target: osx-x64
+
     runs-on: ${{ matrix.os }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,8 +45,19 @@ jobs:
       - name: Build
         run: dotnet build --no-restore
 
-      - name: Test
-        run: dotnet test --no-build 
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal --logger trx --collect:"XPlat Code Coverage"
+
+      - name: Generate test report
+        uses: bibipkins/dotnet-test-reporter@v1.4.1
+        if: ${{ always() }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          comment-title: 'Test Results'
+          results-path: tests/MotionExtract.Tests/**/*.trx
+          coverage-path: tests/MotionExtract.Tests/**/*.cobertura.xml
+          coverage-type: cobertura
+          coverage-threshold: 70
 
       - name: Publish
         run: dotnet publish src/MotionExtract/MotionExtract.csproj --runtime "${{ matrix.target }}" -c Debug
