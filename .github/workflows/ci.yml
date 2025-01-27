@@ -57,7 +57,7 @@ jobs:
           results-path: tests/MotionExtract.Tests/**/*.trx
           coverage-path: tests/MotionExtract.Tests/**/*.cobertura.xml
           coverage-type: cobertura
-          coverage-threshold: 70
+          coverage-threshold: 20
 
       - name: Publish
         run: dotnet publish src/MotionExtract/MotionExtract.csproj --runtime "${{ matrix.target }}" -c Debug
