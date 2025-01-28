@@ -10,7 +10,7 @@ public abstract class PhotoVideoBase(FileInfo baseFile)
 
     public abstract void Extract();
 
-    public virtual void Save(string outputDir)
+    public void Save(string outputDir)
     {
         var baseFileName = Path.GetFileNameWithoutExtension(BaseFile.FullName);
 
@@ -22,7 +22,7 @@ public abstract class PhotoVideoBase(FileInfo baseFile)
 
         for (var i = 0; i < Mp4Data.Count; i++)
         {
-            var mp4FileName = $"{baseFileName}__video_{i + 1}.mp4";
+            var mp4FileName = $"{baseFileName}_video_{i + 1}.mp4";
             File.WriteAllBytes(Path.Combine(outputDir, mp4FileName), Mp4Data[i]);
         }
     }
