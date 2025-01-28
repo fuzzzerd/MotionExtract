@@ -1,12 +1,29 @@
 namespace MotionExtract;
 
-public class MotionPhoto(FileInfo baseFile) : PhotoVideoBase(baseFile)
+public class MotionPhoto(FileInfo baseFile) : IPhotoVideo
 {
-    public override void Extract()
-    {
-        Console.WriteLine($"Processing: {BaseFile.FullName}, size: {BaseFile.Length} bytes");
+    private readonly FileInfo _baseFile = baseFile;
 
-        var data = File.ReadAllBytes(BaseFile.FullName);
+    public byte[] JpgData { get; set; } = [];
+
+    public byte[] Mp4Data { get; set; } = [];
+
+    public void Save(string outputDir)
+    {
+        var baseFileName = Path.GetFileNameWithoutExtension(_baseFile.FullName);
+
+        var jpgFileName = $"{baseFileName}_photo.jpg";
+        File.WriteAllBytes(Path.Combine(outputDir, jpgFileName), JpgData);
+
+        var mp4FileName = $"{baseFileName}_video.mp4";
+        File.WriteAllBytes(Path.Combine(outputDir, mp4FileName), Mp4Data);
+    }
+
+    public void Extract()
+    {
+        Console.WriteLine($"Processing: {_baseFile.FullName}, size: {_baseFile.Length} bytes");
+
+        var data = File.ReadAllBytes(_baseFile.FullName);
 
         // Look for the position of the "ftyp" in the data to detect MP4 start
         var mp4StartPos = IndexOfFtyp(data);
@@ -22,8 +39,8 @@ public class MotionPhoto(FileInfo baseFile) : PhotoVideoBase(baseFile)
             {
                 jpgEndPos += 2; // account for the length of the search string
 
-                JpgData.Add([.. data.Take(jpgEndPos)]);
-                Mp4Data.Add([.. data.Skip(mp4StartPos)]);
+                JpgData = [.. data.Take(jpgEndPos)];
+                Mp4Data = [.. data.Skip(mp4StartPos)];
             }
             else
             {

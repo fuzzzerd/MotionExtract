@@ -33,7 +33,7 @@ public static class Program
 
         foreach (var file in files)
         {
-            if (PhotoVideoBase.TryGetPv(file, out var pvFile))
+            if (TryGetPv(file, out var pvFile))
             {
                 pvFile.Extract();
                 pvFile.Save(Path.Combine(srcDir, "output"));
@@ -45,5 +45,25 @@ public static class Program
         }
 
         Console.WriteLine("Done.");
+    }
+
+    public static bool TryGetPv(string filePath, out IPhotoVideo file)
+    {
+        var fullFilePath = Path.GetFullPath(filePath);
+
+        if (!File.Exists(fullFilePath))
+        {
+            file = default!;
+            return false;
+        }
+
+        if (new[] { "jpeg", "jpg" }.Contains(Path.GetExtension(filePath).TrimStart('.'), StringComparer.OrdinalIgnoreCase))
+        {
+            file = new MotionPhoto(new FileInfo(fullFilePath));
+            return true;
+        }
+
+        file = default!;
+        return false;
     }
 }

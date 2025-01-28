@@ -7,13 +7,13 @@ public class MotionPhotoShould
     {
         // Arrange
         var baseFile = new FileInfo("SyntheticFiles/OnePOneV.MP.jpg");
-        var photoVideoBase = new MotionPhoto(baseFile);
+        var motionPhoto = new MotionPhoto(baseFile);
 
         // Act
-        photoVideoBase.Extract();
+        motionPhoto.Extract();
 
         // Assert
-        Assert.Single(photoVideoBase.JpgData);
+        Assert.NotEmpty(motionPhoto.JpgData);
     }
 
     [Fact]
@@ -21,13 +21,13 @@ public class MotionPhotoShould
     {
         // Arrange
         var baseFile = new FileInfo("SyntheticFiles/OnePOneV.MP.jpg");
-        var photoVideoBase = new MotionPhoto(baseFile);
+        var motionPhoto = new MotionPhoto(baseFile);
 
         // Act
-        photoVideoBase.Extract();
+        motionPhoto.Extract();
 
         // Assert
-        Assert.Equal(8, photoVideoBase.JpgData[0].Length);
+        Assert.Equal(8, motionPhoto.JpgData.Length);
     }
 
     [Fact]
@@ -35,13 +35,13 @@ public class MotionPhotoShould
     {
         // Arrange
         var baseFile = new FileInfo("SyntheticFiles/OnePOneV.MP.jpg");
-        var photoVideoBase = new MotionPhoto(baseFile);
+        var motionPhoto = new MotionPhoto(baseFile);
 
         // Act
-        photoVideoBase.Extract();
+        motionPhoto.Extract();
 
         // Assert
-        Assert.Single(photoVideoBase.Mp4Data);
+        Assert.NotEmpty(motionPhoto.Mp4Data);
     }
 
     [Fact]
@@ -49,13 +49,13 @@ public class MotionPhotoShould
     {
         // Arrange
         var baseFile = new FileInfo("SyntheticFiles/OnePOneV.MP.jpg");
-        var photoVideoBase = new MotionPhoto(baseFile);
+        var motionPhoto = new MotionPhoto(baseFile);
 
         // Act
-        photoVideoBase.Extract();
+        motionPhoto.Extract();
 
         // Assert
-        Assert.Equal(24, photoVideoBase.Mp4Data[0].Length);
+        Assert.Equal(24, motionPhoto.Mp4Data.Length);
     }
 
     [Fact]
@@ -63,14 +63,14 @@ public class MotionPhotoShould
     {
         // Arrange
         var baseFile = new FileInfo("SyntheticFiles/OneV.jpg");
-        var photoVideoBase = new MotionPhoto(baseFile);
+        var motionPhoto = new MotionPhoto(baseFile);
 
         // Act
-        photoVideoBase.Extract();
+        motionPhoto.Extract();
 
         // Assert
-        Assert.Empty(photoVideoBase.JpgData);
-        Assert.Empty(photoVideoBase.Mp4Data);
+        Assert.Empty(motionPhoto.JpgData);
+        Assert.Empty(motionPhoto.Mp4Data);
     }
 
     [Fact]
@@ -78,13 +78,13 @@ public class MotionPhotoShould
     {
         // Arrange
         var baseFile = new FileInfo("SyntheticFiles/EmptyFile.jpg");
-        var photoVideoBase = new MotionPhoto(baseFile);
+        var motionPhoto = new MotionPhoto(baseFile);
 
         // Act
-        photoVideoBase.Extract();
+        motionPhoto.Extract();
 
         // Assert
-        Assert.Empty(photoVideoBase.JpgData);
-        Assert.Empty(photoVideoBase.Mp4Data);
+        Assert.Empty(motionPhoto.JpgData);
+        Assert.Empty(motionPhoto.Mp4Data);
     }
 }
