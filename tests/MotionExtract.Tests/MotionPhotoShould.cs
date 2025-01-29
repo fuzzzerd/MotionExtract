@@ -2,11 +2,13 @@ namespace MotionExtract.Tests;
 
 public class MotionPhotoShould
 {
-    [Fact]
-    public void Should_Produce_One_JpgData()
+    [Theory]
+    [InlineData("SyntheticFiles/OnePOneV.MP.jpg")]
+    [InlineData("CameraFiles/PXL_20220613_003727701.MP.jpg")]
+    public void Should_Produce_One_JpgData(string filePath)
     {
         // Arrange
-        var baseFile = new FileInfo("SyntheticFiles/OnePOneV.MP.jpg");
+        var baseFile = new FileInfo(filePath);
         var motionPhoto = new MotionPhoto(baseFile);
 
         // Act
@@ -14,6 +16,22 @@ public class MotionPhotoShould
 
         // Assert
         Assert.NotEmpty(motionPhoto.JpgData);
+    }
+
+    [Theory]
+    [InlineData("SyntheticFiles/OnePOneV.MP.jpg")]
+    [InlineData("CameraFiles/PXL_20220613_003727701.MP.jpg")]
+    public void Should_Produce_One_MpgData(string filePath)
+    {
+        // Arrange
+        var baseFile = new FileInfo(filePath);
+        var motionPhoto = new MotionPhoto(baseFile);
+
+        // Act
+        motionPhoto.Extract();
+
+        // Assert
+        Assert.NotEmpty(motionPhoto.Mp4Data);
     }
 
     [Fact]
@@ -28,20 +46,6 @@ public class MotionPhotoShould
 
         // Assert
         Assert.Equal(8, motionPhoto.JpgData.Length);
-    }
-
-    [Fact]
-    public void Should_Produce_One_MpgData()
-    {
-        // Arrange
-        var baseFile = new FileInfo("SyntheticFiles/OnePOneV.MP.jpg");
-        var motionPhoto = new MotionPhoto(baseFile);
-
-        // Act
-        motionPhoto.Extract();
-
-        // Assert
-        Assert.NotEmpty(motionPhoto.Mp4Data);
     }
 
     [Fact]
