@@ -49,6 +49,21 @@ public class MotionPhotoShould
     }
 
     [Fact]
+    public void Should_Have_Jpg_Segment_Matching_Output()
+    {
+        // Arrange
+        var baseFile = new FileInfo("CameraFiles/PXL_20220613_003727701.MP.jpg");
+        var expectedJpgSequence = File.ReadAllBytes("CameraFiles/ExpectedOutput/PXL_20220613_003727701.MP_photo.jpg");
+        var motionPhoto = new MotionPhoto(baseFile);
+
+        // Act
+        motionPhoto.Extract();
+
+        // Assert
+        Assert.Equal(expectedJpgSequence, motionPhoto.JpgData);
+    }
+
+    [Fact]
     public void Should_Load_Correct_Mp4_Sequence_Data()
     {
         // Arrange
@@ -60,6 +75,21 @@ public class MotionPhotoShould
 
         // Assert
         Assert.Equal(24, motionPhoto.Mp4Data.Length);
+    }
+
+    [Fact]
+    public void Should_Have_Mp4_Segment_Matching_Output()
+    {
+        // Arrange
+        var baseFile = new FileInfo("CameraFiles/PXL_20220613_003727701.MP.jpg");
+        var expectedMp4Sequence = File.ReadAllBytes("CameraFiles/ExpectedOutput/PXL_20220613_003727701.MP_video.mp4");
+        var motionPhoto = new MotionPhoto(baseFile);
+
+        // Act
+        motionPhoto.Extract();
+
+        // Assert
+        Assert.Equal(expectedMp4Sequence, motionPhoto.Mp4Data);
     }
 
     [Fact]
