@@ -8,4 +8,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-</Project>
+<ItemGroup>
+
+  <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="9.0.7" /></ItemGroup></Project>
