@@ -10,6 +10,9 @@ public class MotionPhoto(FileInfo baseFile) : IPhotoVideo
 
     public void Save(string outputDir)
     {
+        // Ensure output directory exists
+        Directory.CreateDirectory(outputDir);
+
         var baseFileName = Path.GetFileNameWithoutExtension(_baseFile.FullName);
 
         var jpgFileName = $"{baseFileName}_photo.jpg";
@@ -21,8 +24,6 @@ public class MotionPhoto(FileInfo baseFile) : IPhotoVideo
 
     public void Extract()
     {
-        Console.WriteLine($"Processing: {_baseFile.FullName}, size: {_baseFile.Length} bytes");
-
         var data = File.ReadAllBytes(_baseFile.FullName);
 
         // Look for the position of the "ftyp" in the data to detect MP4 start
@@ -42,15 +43,12 @@ public class MotionPhoto(FileInfo baseFile) : IPhotoVideo
                 JpgData = [.. data.Take(jpgEndPos)];
                 Mp4Data = [.. data.Skip(mp4StartPos)];
             }
-            else
-            {
-                Console.WriteLine("SKIPPING - File appears to contain an MP4 but no valid JPG EOI segment could be found.");
-            }
         }
-        else
-        {
-            Console.WriteLine("SKIPPING - File does not appear to be a Google motion photo.");
-        }
+    }
+
+    public bool HasValidData()
+    {
+        return JpgData.Length > 0 && Mp4Data.Length > 0;
     }
 
     /// <summary>

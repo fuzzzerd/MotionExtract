@@ -4,4 +4,5 @@ public interface IPhotoVideo
 {
     void Extract();
     void Save(string outputDir);
+    bool HasValidData();
 }
