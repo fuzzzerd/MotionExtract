@@ -121,4 +121,64 @@ public class MotionPhotoShould
         Assert.Empty(motionPhoto.JpgData);
         Assert.Empty(motionPhoto.Mp4Data);
     }
+
+    [Fact]
+    public void Should_Have_Valid_Data_When_Both_Populated()
+    {
+        // Arrange
+        var baseFile = new FileInfo("CameraFiles/PXL_20220613_003727701.MP.jpg");
+        var motionPhoto = new MotionPhoto(baseFile);
+        motionPhoto.Extract();
+
+        // Act
+        var result = motionPhoto.HasValidData();
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void Should_Not_Have_Valid_Data_When_Both_Empty()
+    {
+        // Arrange
+        var baseFile = new FileInfo("SyntheticFiles/EmptyFile.jpg");
+        var motionPhoto = new MotionPhoto(baseFile);
+        motionPhoto.Extract();
+
+        // Act
+        var result = motionPhoto.HasValidData();
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void Should_Not_Have_Valid_Data_When_Only_Jpg_Data()
+    {
+        // Arrange
+        var baseFile = new FileInfo("SyntheticFiles/EmptyFile.jpg");
+        var motionPhoto = new MotionPhoto(baseFile);
+        motionPhoto.JpgData = [0xFF, 0xD8, 0xFF, 0xD9]; // Fake JPG data
+
+        // Act
+        var result = motionPhoto.HasValidData();
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void Should_Not_Have_Valid_Data_When_Only_Mp4_Data()
+    {
+        // Arrange
+        var baseFile = new FileInfo("SyntheticFiles/EmptyFile.jpg");
+        var motionPhoto = new MotionPhoto(baseFile);
+        motionPhoto.Mp4Data = [0x66, 0x74, 0x79, 0x70]; // Fake MP4 data
+
+        // Act
+        var result = motionPhoto.HasValidData();
+
+        // Assert
+        Assert.False(result);
+    }
 }

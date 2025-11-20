@@ -251,6 +251,7 @@ public static class Program
         Console.WriteLine(message);
     }
 
+    [ExcludeFromCodeCoverage]
     public static bool TryGetPv(string filePath, out IPhotoVideo file)
     {
         var fullFilePath = Path.GetFullPath(filePath);
