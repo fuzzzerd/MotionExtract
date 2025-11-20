@@ -9,6 +9,7 @@ namespace MotionExtract;
 /// Adapted from https://android.stackexchange.com/a/203898
 /// Converted to C#.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class Program
 {
     static int Main(string[] args)
@@ -53,7 +54,7 @@ public static class Program
         }
 
         // Determine output directory
-        string outputDir = parsedArgs.OutputDirectory ?? Path.Combine(srcDir, "output");
+        var outputDir = parsedArgs.OutputDirectory ?? Path.Combine(srcDir, "output");
 
         // Get all files matching the given pattern
         WriteInfo($"Scanning for files in: {srcDir}");
@@ -70,10 +71,10 @@ public static class Program
         Console.WriteLine();
 
         // Track statistics
-        int processed = 0;
-        int extracted = 0;
-        int skipped = 0;
-        int errors = 0;
+        var processed = 0;
+        var extracted = 0;
+        var skipped = 0;
+        var errors = 0;
 
         // Process each file
         foreach (var file in files)
@@ -131,7 +132,7 @@ public static class Program
     {
         var result = new ParsedArguments();
 
-        for (int i = 0; i < args.Length; i++)
+        for (var i = 0; i < args.Length; i++)
         {
             var arg = args[i];
 
