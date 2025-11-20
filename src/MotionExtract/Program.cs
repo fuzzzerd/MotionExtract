@@ -1,4 +1,5 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MotionExtract;
@@ -125,6 +126,7 @@ public static class Program
         return errors > 0 ? 1 : 0;
     }
 
+    [ExcludeFromCodeCoverage]
     private static ParsedArguments ParseArguments(string[] args)
     {
         var result = new ParsedArguments();
@@ -178,6 +180,7 @@ public static class Program
         public bool ShowVersion { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     private static void ShowHelp()
     {
         var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0";
@@ -211,12 +214,14 @@ public static class Program
         Console.WriteLine("    <filename>_video.mp4 - The video clip");
     }
 
+    [ExcludeFromCodeCoverage]
     private static void ShowVersion()
     {
         var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0";
         Console.WriteLine($"MotionExtract v{version}");
     }
 
+    [ExcludeFromCodeCoverage]
     private static void WriteSuccess(string message)
     {
         Console.ForegroundColor = ConsoleColor.Green;
@@ -224,6 +229,7 @@ public static class Program
         Console.ResetColor();
     }
 
+    [ExcludeFromCodeCoverage]
     private static void WriteWarning(string message)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -231,6 +237,7 @@ public static class Program
         Console.ResetColor();
     }
 
+    [ExcludeFromCodeCoverage]
     private static void WriteError(string message)
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -238,6 +245,7 @@ public static class Program
         Console.ResetColor();
     }
 
+    [ExcludeFromCodeCoverage]
     private static void WriteInfo(string message)
     {
         Console.WriteLine(message);
